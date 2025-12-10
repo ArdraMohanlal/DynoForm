@@ -3,11 +3,9 @@ import {
   Tabs,
   Tab,
   Box,
-  Typography,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import LayersIcon from "@mui/icons-material/Layers";
 
@@ -41,12 +39,23 @@ const ElementsSider = ({
   drawerOpen = true,
 }) => {
   const theme = useTheme();
-  const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // Use MUI breakpoints for responsive width
+  const isXs = useMediaQuery(theme.breakpoints.down("sm")); // xs & sm
+  const isMd = useMediaQuery(theme.breakpoints.between("sm", "md")); // md screens
+  const isLgUp = useMediaQuery(theme.breakpoints.up("lg")); // lg and above
+
+  let siderWidth = 320; // default
+  if (isXs) siderWidth = "100%";
+  else if (isMd) siderWidth = 280;
+  else if (isLgUp) siderWidth = 340;
 
   return (
     <Box
       sx={{
-        width: isSmDown ? "100%" : 320,
+        width: siderWidth,
+        minWidth: 200,
+        maxWidth: "100%",
         height: "100vh",
         bgcolor: theme.palette.background.paper,
         borderRight: 1,
@@ -55,6 +64,7 @@ const ElementsSider = ({
         flexDirection: "column",
         overflow: "hidden",
         position: "relative",
+        transition: "width 0.3s ease",
       }}
     >
       <Tabs
