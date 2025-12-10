@@ -17,7 +17,7 @@ const OptionsEditor = ({ selectedElement, update }) => {
       {opts.map((opt, i) => (
         <Stack key={i} direction="row" spacing={1} sx={{ mb: 1 }}>
           <TextField size="small" value={opt.label} onChange={(e) => updateOption(i, "label", e.target.value)} placeholder="Label" sx={{ flex: 1 }} />
-          <TextField size="small" value={opt.value} onChange={(e) => updateOption(i, "value", e.target.value)} placeholder="Value" sx={{ flex: 1 }} />
+          {/* <TextField size="small" value={opt.value} onChange={(e) => updateOption(i, "value", e.target.value)} placeholder="Value" sx={{ flex: 1 }} /> */}
           <IconButton size="small" color="error" onClick={() => update({ options: opts.filter((_, j) => j !== i) })}><DeleteIcon /></IconButton>
         </Stack>
       ))}
