@@ -1,6 +1,3 @@
-// src/templates/formTemplates.js
-// Keep ids numeric and unique per template for easier nextId calc
-
 export const jobRegistrationTemplate = [
   {
     id: 1,

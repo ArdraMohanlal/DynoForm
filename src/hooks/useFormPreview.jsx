@@ -1,4 +1,3 @@
-// src/hooks/useFormPreview.js
 import { useState, useRef } from "react";
 import { validateFormFields } from "../../src/components/utils/validation";
 
@@ -8,7 +7,6 @@ export const useFormPreview = (formElements) => {
   const [successOpen, setSuccessOpen] = useState(false);
   const formRef = useRef(null);
 
-  // Auto scroll to first error
   const scrollToFirstError = () => {
     if (!formRef.current) return;
     const firstErrorEl = formRef.current.querySelector(

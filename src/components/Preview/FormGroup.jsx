@@ -1,4 +1,3 @@
-// src/components/FormPreview/FormGroup.jsx
 import React from "react";
 import { Paper, Typography, Divider } from "@mui/material";
 import FormField from "./FormField";

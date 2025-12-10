@@ -40,10 +40,9 @@ const ElementsSider = ({
 }) => {
   const theme = useTheme();
 
-  // Use MUI breakpoints for responsive width
-  const isXs = useMediaQuery(theme.breakpoints.down("sm")); // xs & sm
-  const isMd = useMediaQuery(theme.breakpoints.between("sm", "md")); // md screens
-  const isLgUp = useMediaQuery(theme.breakpoints.up("lg")); // lg and above
+  const isXs = useMediaQuery(theme.breakpoints.down("sm")); 
+  const isMd = useMediaQuery(theme.breakpoints.between("sm", "md")); 
+  const isLgUp = useMediaQuery(theme.breakpoints.up("lg")); 
 
   let siderWidth = 320; // default
   if (isXs) siderWidth = "100%";

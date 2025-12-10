@@ -1,4 +1,3 @@
-// src/components/FormPreview/SuccessDialog.jsx
 import React from "react";
 import { Dialog, Box, Typography, Button } from "@mui/material";
 

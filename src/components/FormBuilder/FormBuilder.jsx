@@ -6,10 +6,8 @@ import FormCanvas from './FormCanvas'
 import ElementEditor from "../ElementsEditor/ElementEditor";
 import { useFormStore } from "../../store/formStore";
 
-// Helper function to generate unique IDs
 const generateUniqueId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-// createElement now includes a `validation` object per field type
 const createElement = (id, type) => {
   const base = { id, type, conditional: [] };
 
@@ -81,7 +79,7 @@ const createElement = (id, type) => {
         defaultChecked: false,
         helperText: "",
         disabled: false,
-        validation: { required: false, customMessage: "" }, // required=checkbox must be true
+        validation: { required: false, customMessage: "" },  
       };
     case "Date":
       return {
@@ -141,14 +139,11 @@ function FormBuilder() {
   const [groupedElements, setGroupedElements] = React.useState([]);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
-  // find selected element across top-level and groups
   const selectedElement =
     formElements.flatMap((el) => (el.type === "group" ? [el, ...el.fields] : [el])).find((el) => el.id === selectedElementId) || null;
 
   const addBasicElement = (type) => {
     const element = createElement(nextId, type);
-    // addElement expects an element without necessarily giving id? Your store's addElement assigns nextId,
-    // but to ensure validation object present we call addElement with a complete element.
     addElement(element);
     setDrawerOpen(false);
   };
@@ -170,7 +165,6 @@ function FormBuilder() {
       { ...groupTemplate, templateId: generateUniqueId() },
     ]);
 
-    // Immediately add group instance with new unique ids
     const newFields = groupFields.map((f) => ({
       id: generateUniqueId(),
       type: f.type,
@@ -230,7 +224,6 @@ function FormBuilder() {
 
   return (
     <Box display="flex" minHeight="100vh" bgcolor="#f9fafb" position="relative">
-      {/* LEFT SIDEBAR */}
       <Box className="hidden md:block flex-shrink-0 w-80 border-r bg-white" sx={{ height: "100vh", overflowY: "auto" }}>
         <ElementsSider
           tabValue={tabValue}
@@ -247,12 +240,10 @@ function FormBuilder() {
         />
       </Box>
 
-      {/* MOBILE FAB */}
       <Fab color="primary" onClick={() => setDrawerOpen(true)} sx={{ position: "fixed", top: 20, left: 16, zIndex: 1300, display: { xs: "flex", md: "none" }, bgcolor: "purple.600" }}>
         <AddIcon />
       </Fab>
 
-      {/* MOBILE DRAWER */}
       <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)} PaperProps={{ sx: { width: "85%", maxWidth: 340, height: "100%" } }}>
         <ElementsSider
           tabValue={tabValue}
@@ -269,17 +260,14 @@ function FormBuilder() {
         />
       </Drawer>
 
-      {/* CANVAS */}
       <Box flexGrow={1} p={{ xs: 2, md: 6 }} onClick={clearSelection} sx={{ height: "100vh", overflowY: "auto", scrollbarWidth: "none", "&::-webkit-scrollbar": { display: "none" } }}>
         <FormCanvas formElements={formElements} selectedElementId={selectedElementId} onElementClick={setSelectedElementId} onReorder={reorderElements} />
       </Box>
 
-      {/* RIGHT EDITOR (Desktop) */}
       <Box className="hidden lg:block flex-shrink-0 w-96 border-l bg-white shadow-2xl" sx={{ height: "100vh", overflowY: "auto" }}>
         <ElementEditor selectedElement={selectedElement} formElements={formElements} onUpdateElement={updateElement} onDeleteElement={deleteElement} />
       </Box>
 
-      {/* MOBILE BOTTOM EDITOR */}
       {selectedElement && (
         <Box className="lg:hidden fixed bottom-0 inset-x-0 bg-white border-t-2 shadow-2xl z-50">
           <ElementEditor selectedElement={selectedElement} formElements={formElements} compact onUpdateElement={updateElement} onClose={clearSelection} onDeleteElement={deleteElement} />

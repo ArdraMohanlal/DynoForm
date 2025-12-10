@@ -1,4 +1,3 @@
-// src/pages/Templates.jsx
 import React from "react";
 import { Box, Grid, Paper, Typography, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";

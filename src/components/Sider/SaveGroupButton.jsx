@@ -14,7 +14,7 @@ const SaveGroupButton = ({ onSaveGroup }) => {
         p: 2,
         borderTop: `1px solid ${theme.palette.divider}`,
         boxShadow: theme.shadows[4],
-        zIndex: 10,
+       zIndex: 10,
       }}
     >
       <Button
